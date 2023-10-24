@@ -18,6 +18,8 @@ class Filter extends React.Component {
           className={styles.input_filter}
           required
           value={this.props.filterValue}
+          pattern="^[a-zA-Zа-яА-Я]+(([' \-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$
+\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
         />
       </>
     );

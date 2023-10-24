@@ -13,7 +13,6 @@ class ContactList extends React.Component {
   handleClickButtonDelete = e => {
     const { contacts, handleOnDelete } = this.props;
     const newContactsArray = contacts.filter(el => el.id !== e.target.id);
-    console.log(newContactsArray);
     handleOnDelete(newContactsArray);
   };
 

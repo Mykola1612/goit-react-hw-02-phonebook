@@ -11,17 +11,18 @@ export class App extends React.Component {
 
   handleSubmit = data => {
     const contactExists = this.state.contacts.some(
-      contact => contact.name === data.name || contact.number === data.number
+      contact =>
+        contact.name.toLowerCase() === data.name.toLowerCase() ||
+        contact.number === data.number
     );
 
     if (contactExists) {
       alert(`${this.state.name} is already in contacts.`);
       return;
-    } else {
-      this.setState({
-        contacts: [...this.state.contacts, data],
-      });
     }
+    this.setState({
+      contacts: [...this.state.contacts, data],
+    });
   };
 
   handleinputChangeFilter = data => {

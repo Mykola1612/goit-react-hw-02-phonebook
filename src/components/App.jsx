@@ -10,18 +10,21 @@ export class App extends React.Component {
   };
 
   handleSubmit = data => {
-    const contactExists = this.state.contacts.some(
-      contact =>
-        contact.name.toLowerCase() === data.name.toLowerCase() ||
-        contact.number === data.number
-    );
+    this.setState(prevState => {
+      const contactExists = prevState.contacts.some(
+        contact =>
+          contact.name.toLowerCase() === data.name.toLowerCase() ||
+          contact.number === data.number
+      );
 
-    if (contactExists) {
-      alert(`${this.state.name} is already in contacts.`);
-      return;
-    }
-    this.setState({
-      contacts: [...this.state.contacts, data],
+      if (contactExists) {
+        alert(`${data.name} is already in contacts.`);
+        return { contacts: prevState.contacts };
+      }
+
+      return {
+        contacts: [...prevState.contacts, data],
+      };
     });
   };
 
@@ -31,11 +34,22 @@ export class App extends React.Component {
     });
   };
 
-  handleOnDelete = newContactsArray => {
-    this.setState({
-      contacts: newContactsArray,
+  handleOnDelete = id => {
+    this.setState(prevState => {
+      const newContactsArray = prevState.contacts.filter(el => el.id !== id);
+      return {
+        contacts: newContactsArray,
+      };
     });
   };
+
+  handleFilterContacts = () => {
+    const filteredContacts = this.state.contacts.filter(contact =>
+      contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
+    );
+    return filteredContacts;
+  };
+
   render() {
     return (
       <div className="container">
@@ -48,8 +62,7 @@ export class App extends React.Component {
           filterValue={this.state.filter}
         />
         <ContactList
-          contacts={this.state.contacts}
-          filter={this.state.filter}
+          contacts={this.handleFilterContacts}
           handleOnDelete={this.handleOnDelete}
         />
       </div>

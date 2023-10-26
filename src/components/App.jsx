@@ -10,18 +10,18 @@ export class App extends React.Component {
   };
 
   handleSubmit = data => {
+    const contactExists = this.state.contacts.some(
+      contact =>
+        contact.name.toLowerCase() === data.name.toLowerCase() ||
+        contact.number === data.number
+    );
+
+    if (contactExists) {
+      alert(`${data.name} is already in contacts.`);
+      return;
+    }
+
     this.setState(prevState => {
-      const contactExists = prevState.contacts.some(
-        contact =>
-          contact.name.toLowerCase() === data.name.toLowerCase() ||
-          contact.number === data.number
-      );
-
-      if (contactExists) {
-        alert(`${data.name} is already in contacts.`);
-        return { contacts: prevState.contacts };
-      }
-
       return {
         contacts: [...prevState.contacts, data],
       };

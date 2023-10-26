@@ -2,9 +2,9 @@ import React from 'react';
 import styles from './ContactList.module.css';
 
 const ContactList = ({ contacts, handleOnDelete }) => {
-  const handleClickButtonDelete = e => {
-    handleOnDelete(e.target.id);
-  };
+  // const handleClickButtonDelete = e => {
+  //   handleOnDelete(e.target.id);
+  // };
 
   const filteredContacts = contacts();
   return (
@@ -16,8 +16,7 @@ const ContactList = ({ contacts, handleOnDelete }) => {
             <button
               type="button"
               className={styles.button_contacts__list}
-              onClick={handleClickButtonDelete}
-              id={contact.id}
+              onClick={() => handleOnDelete(contact.id)}
             >
               Delete
             </button>

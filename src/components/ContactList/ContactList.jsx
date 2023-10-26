@@ -2,10 +2,6 @@ import React from 'react';
 import styles from './ContactList.module.css';
 
 const ContactList = ({ contacts, handleOnDelete }) => {
-  // const handleClickButtonDelete = e => {
-  //   handleOnDelete(e.target.id);
-  // };
-
   const filteredContacts = contacts();
   return (
     <ul className={styles.list_contacts}>
